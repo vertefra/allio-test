@@ -1,7 +1,19 @@
+import { Container, Row, Col } from 'react-bootstrap'
+
+import Header from './components/Header'
+import Footer from './components/Footer'
+import HomeScreen from './screens/HomeScreen.js'
+
 function App() {
   return (
     <>
-      <h1>allio test</h1>
+      <Header />
+      <Container>
+        <main className="py-3">
+          <HomeScreen />
+        </main>
+      </Container>
+      <Footer />
     </>
   )
 }
