@@ -2,9 +2,13 @@
   "name": "allio-test",
   "version": "0.0.1",
   "description": "MERN shopping ",
-  "main": "server.js",
+  "main": "backend/server.js",
+  "type": "module",
   "scripts": {
-    "start": "nodemon backend/server.js --watch backend -e js"
+    "start": "node backend/server",
+    "server": "nodemon backend/server.js --watch backend -e js,json",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -17,7 +21,13 @@
   },
   "homepage": "https://github.com/vertefra/allio-test#readme",
   "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "mongoose": "^5.10.10",
     "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0"
   }
 }

@@ -1,4 +1,4 @@
-module.exports = [
+export default [
   {
     _id: '1',
     name: 'Airpods Wireless Bluetooth Headphones',
