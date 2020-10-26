@@ -8,11 +8,13 @@ app.get('/', (req, res) => {
 })
 
 app.get('/api/products', (req, res) => {
+  console.log('Products')
   res.json(products)
 })
 
 app.get('/api/products/:id', (req, res) => {
   const product = products.find(p => p._id === req.params.id)
+  console.log(product)
   res.json(product)
 })
 
