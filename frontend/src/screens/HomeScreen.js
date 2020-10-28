@@ -10,7 +10,7 @@ const HomeScreen = () => {
     ;(async () => {
       try {
         const { data } = await axios.get('/api/products')
-        setProducts(data)
+        setProducts(data.products)
       } catch (err) {
         console.log(err)
       }
@@ -21,7 +21,7 @@ const HomeScreen = () => {
     <>
       <h1>lastest product</h1>
       <Row>
-        {products &&
+        {products.length > 0 &&
           products.map(product => {
             return (
               <Col key={product._id} sm={12} md={6} lg={4}>
