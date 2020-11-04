@@ -1,5 +1,8 @@
 import express from 'express'
-import { getProducts, getProductById } from '../controllers/productControllers'
+import {
+  getProducts,
+  getProductById,
+} from '../controllers/productControllers.js'
 
 const productRouter = express.Router()
 
@@ -12,13 +15,5 @@ productRouter.route('/').get(getProducts)
 // @route   GET /api/products/:id
 // @access  Public
 productRouter.route('/:id').get(getProductById)
-
-productRouter.get(
-  '/:id',
-  asyncHandler(async (req, res) => {})
-)
-
-// NOTE: asyncHandler catches all the error between the req and response
-// working as a try-catch
 
 export default productRouter
