@@ -22,3 +22,10 @@ export const authUser = asyncHandler(async (req, res) => {
     throw new Error('Invalid Email or Password')
   }
 })
+
+// @desc    Get user profile
+// @route   GET /api/users/prifle
+// @access  Private
+export const getUserProfile = asyncHandler(async (req, res) => {
+  res.send('success')
+})

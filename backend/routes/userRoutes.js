@@ -1,11 +1,9 @@
 import express from 'express'
-import { authUser } from '../controllers/userControllers.js'
-
+import { authUser, getUserProfile } from '../controllers/userControllers.js'
+import protect from '../middleware/authMiddleware.js'
 const userRouter = express.Router()
 
-// @desc    Auth user and get token
-// @route   POST /api/users/login
-// @access  Public
 userRouter.route('/login').post(authUser)
+userRouter.route('/profile').get(protect, getUserProfile)
 
 export default userRouter
