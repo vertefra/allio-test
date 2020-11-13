@@ -1,10 +1,14 @@
+import { useEffect } from 'react'
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { createOrder } from '../actions/orderActions.js'
 import Checkoutsteps from '../components/Checkoutsteps.js'
 import Message from '../components/Message.js'
 
-const PlaceOrderScreen = () => {
+const PlaceOrderScreen = ({ history }) => {
+  const dispatch = useDispatch()
+
   const cart = useSelector((state) => state.cart)
 
   // calculalte prices
@@ -25,8 +29,28 @@ const PlaceOrderScreen = () => {
       Number(cart.shippingPrice)
   )
 
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
+
+  useEffect(() => {
+    if (success) {
+      history.push(`/order/${order._id}`)
+    }
+    // eslint-disable-next-line
+  }, [history, success])
+
   const placeOrderHandler = (ev) => {
-    console.log('place order')
+    dispatch(
+      createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.shippingPrice,
+        taxPrice: cart.taxPrice,
+        totalPrice: cart.totalPrice,
+      })
+    )
   }
 
   return (
@@ -109,6 +133,10 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
+                <ListGroup.Item>
+                  {error && <Message variant="danger">error</Message>}
+                </ListGroup.Item>
+
                 <Button
                   type="button"
                   className="btn-clock"
